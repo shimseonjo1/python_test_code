@@ -63,9 +63,16 @@ class CardBook: # 명함을 관리하는 클래스
     def get_number_of_pages(self):
         return len(self.cards)
 
-    def list_card(self):
-        for page in self.cards:
-            print(page,':',self.cards[page])
+    def list_card(self,key=None,reverse=False):
+        if key == None:
+            for page in self.cards:
+                print(page,':',self.cards[page])
+        else:
+            sorted_data = sorted(self.cards.items(),
+                                 key=eval(f'lambda item:item[1].{key}'),
+                                 reverse=reverse)
+            for page,card in sorted_data:
+                print(page,':',card)
 
 # print(__name__)
 # print('if문 밖에 namecardclass.py에서 실행')
@@ -81,8 +88,14 @@ if __name__ == '__main__':
     # print(card)
     book = CardBook('거래처')
     card = Card('홍길동','세종','000-888-9999')
-    card1 = Card(name='박문수',email='park@gmail.com')
+    card1 = Card(name='박문수',address='부산',email='park@gmail.com')
+    card2 = Card(name='김정남',address='대전',email='park@gmail.com')
     book.add_card(card)
     book.add_card(card1,5)
+    book.add_card(card2,10)
     print(book.get_number_of_pages())
     book.list_card()
+    print('-'*30)
+    book.list_card('address')
+    print('-'*30)
+    book.list_card('address',True)
