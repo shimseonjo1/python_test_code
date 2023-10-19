@@ -37,9 +37,26 @@ while True:
             print(card)
             print(cardbook)
     elif menu == '3':
-        pass
+        if cardbook == None:
+            print('cardbook 먼저 생성하세요')
+        else:
+            print(list(cardbook.cards.keys()))
+            page = int(input('삭제할 page >>>'))
+            if page in list(cardbook.cards.keys()):
+                card = cardbook.remove_card(page)
+                print(card,'-> 삭제')
+            else:
+                print('page를 잘못입력하셨습니다.')
     elif menu == '4':
-        pass
+        if cardbook == None:
+            print('cardbook 먼저 생성하세요')
+        else:
+            print(list(cardbook.cards.keys()))
+            page = int(input('검색할 page >>>'))
+            if page in list(cardbook.cards.keys()):
+                print(cardbook.cards[page])
+            else:
+                print('page를 잘못입력하셨습니다.')    
     elif menu == '5':
         if cardbook == None:
             print('cardbook 먼저 생성하세요')
